@@ -1,9 +1,8 @@
 package org.example.test;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
 
@@ -14,8 +13,26 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 class StudyTest {
 
 
-    @Test
+    @DisplayName("스터디 만들어")
+    @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
+    void repeateTest(RepetitionInfo c) {
+        System.out.println(
+                "test\t" + c.getCurrentRepetition() + "/" + c.getTotalRepetitions()
+        );
+    }
+
+    //
+    @DisplayName("이건되네?")
+    @ParameterizedTest(name= "{index} {displayName} message={0}")
+    @ValueSource(strings = {"봄","여름","가을","겨울"})
+    void parameterizedTest(String message){
+        System.out.println(message);
+    }
+
     @DisplayName("스터디 만들기")
+//    @Test
+//    @Tag("fast") // Local 에서 실행하고 싶다.
+    @FastTest
     void create_new_study(){
         Study study = new Study();
 
@@ -27,8 +44,10 @@ class StudyTest {
         );
     }
 
-    @Test
     @DisplayName("스터디 부시기")
+//    @Test
+//    @Tag("slow") // CI 환경에서 실행 하고 싶다.
+    @SlowTest
     void create_new_study2(){
         Study study = new Study();
         assertNotNull(study);
