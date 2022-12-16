@@ -10,4 +10,9 @@ class MainTest {
     void main(){
         Main.main(new String[2]);
     }
+
+    @Test
+    void exception(){
+
+    }
 }
