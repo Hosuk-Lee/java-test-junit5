@@ -6,6 +6,8 @@ public class Study {
 
     private int limit;
 
+    private String name;
+
     public Study(){}
 
     public Study(int limit) {
@@ -14,6 +16,11 @@ public class Study {
         }
         this.limit = limit;
 
+    }
+
+    public Study(int limit, String name) {
+        this(limit);
+        this.name = name;
     }
 
     public StudyStatus getStatus() {
@@ -32,5 +39,13 @@ public class Study {
 
         this.limit = limit;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Study{" +
+                "status=" + status +
+                ", limit=" + limit +
+                '}';
     }
 }
